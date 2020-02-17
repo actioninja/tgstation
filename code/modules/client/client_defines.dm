@@ -104,6 +104,9 @@
 	///goonchat chatoutput of the client
 	var/datum/chatOutput/chatOutput
 
+	///Embedded tgui instance
+	var/datum/tgui_embedded/embedded_tgui
+
  	///lazy list of all credit object bound to this client
 	var/list/credits
 

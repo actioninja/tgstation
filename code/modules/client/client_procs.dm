@@ -206,7 +206,8 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 /client/New(TopicData)
 	SSdemo.write_event_line("login [ckey]")
 	var/tdata = TopicData //save this for later use
-	chatOutput = new /datum/chatOutput(src)
+	//chatOutput = new /datum/chatOutput(src)
+	embedded_tgui = new /datum/tgui_embedded(src)
 	TopicData = null							//Prevent calls to client.Topic from connect
 
 	if(connection != "seeker" && connection != "web")//Invalid connection type.
@@ -319,7 +320,8 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		set_macros()
 		update_movement_keys()
 
-	chatOutput.start() // Starts the chat
+	//chatOutput.start() // Starts the chat
+	embedded_tgui.initialize()
 
 	if(alert_mob_dupe_login)
 		spawn()
