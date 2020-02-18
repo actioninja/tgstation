@@ -149,6 +149,15 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	else
 		to_chat(src, "<span class='notice'>There are no admin notices at the moment.</span>")
 
+/client/verb/reload_tgui()
+	set name = "Reload TGUI"
+	set category = "OOC"
+
+	embedded_tgui.initialized = FALSE
+	embedded_tgui = new /datum/tgui_embedded(src)
+	embedded_tgui.initialize()
+
+
 /client/verb/fix_chat()
 	set name = "Fix chat"
 	set category = "OOC"

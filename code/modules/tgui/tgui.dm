@@ -194,6 +194,7 @@
 		"title" = title,
 		"status" = status,
 		"interface" = interface,
+		"embedded" = FALSE,
 		"fancy" = user.client.prefs.tgui_fancy,
 		"locked" = user.client.prefs.tgui_lock,
 		"observer" = isobserver(user),

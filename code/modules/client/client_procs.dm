@@ -121,6 +121,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 			return view_var_Topic(href,href_list,hsrc)
 		if("chat")
 			return chatOutput.Topic(href, href_list)
+		if(EMBED_SRC_NAME)
+			return embedded_tgui.Topic(href, href_list)
 
 	switch(href_list["action"])
 		if("openLink")
@@ -321,7 +323,8 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		update_movement_keys()
 
 	//chatOutput.start() // Starts the chat
-	embedded_tgui.initialize()
+	//TODO: Reload
+	//embedded_tgui.initialize()
 
 	if(alert_mob_dupe_login)
 		spawn()

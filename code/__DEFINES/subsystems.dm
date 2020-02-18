@@ -105,6 +105,7 @@
 #define INIT_ORDER_BLACKBOX			94
 #define INIT_ORDER_SERVER_MAINT		93
 #define INIT_ORDER_INPUT			85
+#define INIT_ORDER_TGUI_EMBED		84
 #define INIT_ORDER_VIS				80
 #define INIT_ORDER_ACHIEVEMENTS		77
 #define INIT_ORDER_RESEARCH			75
@@ -141,6 +142,7 @@
 // If the subsystem isn't listed here it's either DEFAULT or PROCESS (if it's a processing subsystem child)
 
 #define FIRE_PRIORITY_PING			10
+#define FIRE_PRIORITY_TGUI_EMBED	10
 #define FIRE_PRIORITY_IDLE_NPC		10
 #define FIRE_PRIORITY_SERVER_MAINT	10
 #define FIRE_PRIORITY_RESEARCH		10
