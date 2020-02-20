@@ -133,11 +133,11 @@
 	if(on)
 		if(!up)
 			to_chat(user, "<span class='notice'>Your helmet's torch can't pass through your welding visor!</span>")
-			set_light(0)
+			kill_light()
 		else
 			set_light(brightness_on)
 	else
-		set_light(0)
+		kill_light()
 
 	for(var/X in actions)
 		var/datum/action/A=X

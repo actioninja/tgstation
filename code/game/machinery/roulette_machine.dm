@@ -184,7 +184,7 @@
 
 	playing = TRUE
 	update_icon()
-	set_light(0)
+	kill_light()
 
 	var/rolled_number = rand(0, 36)
 

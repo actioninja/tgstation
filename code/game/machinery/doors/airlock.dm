@@ -603,7 +603,7 @@
 			set_light(l_range = 2, l_power = 1)
 			add_overlay(I)
 	else
-		set_light(0)
+		kill_light()
 
 /obj/machinery/door/airlock/do_animate(animation)
 	switch(animation)

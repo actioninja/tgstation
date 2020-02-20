@@ -51,7 +51,7 @@
 
 /obj/structure/etherealball/proc/TurnOff()
 	TurnedOn = FALSE
-	set_light(0)
+	kill_light()
 	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY)
 	update_icon()
 	if(TimerID)

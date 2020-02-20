@@ -382,7 +382,7 @@
 				return
 			to_chat(user, "<span class='notice'>You click [S] into place on [src].</span>")
 			if(S.on)
-				set_light(0)
+				kill_light()
 			gun_light = S
 			update_gunlight()
 			alight = new(src)
@@ -527,7 +527,7 @@
 		if(gun_light.on)
 			set_light(gun_light.brightness_on)
 		else
-			set_light(0)
+			kill_light()
 		cut_overlays(flashlight_overlay, TRUE)
 		var/state = "[gunlight_state][gun_light.on? "_on":""]"	//Generic state.
 		if(gun_light.icon_state in icon_states('icons/obj/guns/flashlights.dmi'))	//Snowflake state?
@@ -538,7 +538,7 @@
 		add_overlay(flashlight_overlay, TRUE)
 		add_overlay(knife_overlay, TRUE)
 	else
-		set_light(0)
+		kill_light()
 		cut_overlays(flashlight_overlay, TRUE)
 		flashlight_overlay = null
 	update_icon(TRUE)

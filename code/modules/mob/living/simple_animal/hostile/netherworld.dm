@@ -21,20 +21,20 @@
 	var/phaser = TRUE
 	var/datum/action/innate/creature/teleport/teleport
 	var/is_phased = FALSE
-	
+
 /mob/living/simple_animal/hostile/netherworld/Initialize()
 	. = ..()
 	if(phaser)
 		teleport = new
 		teleport.Grant(src)
-	
+
 /datum/action/innate/creature
 	background_icon_state = "bg_default"
-	
+
 /datum/action/innate/creature/teleport
 	name = "Teleport"
 	desc = "Teleport to wherever you want, as long as you aren't seen."
-	
+
 /obj/effect/dummy/phased_mob/creature
 	name = "water"
 	icon = 'icons/effects/effects.dmi'
@@ -44,7 +44,7 @@
 	invisibility = 60
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	var/canmove = TRUE
-	
+
 /obj/effect/dummy/phased_mob/creature/relaymove(mob/user, direction)
 	forceMove(get_step(src,direction))
 
@@ -56,7 +56,7 @@
 
 /obj/effect/dummy/phased_mob/creature/singularity_act()
 	return
-	
+
 /datum/action/innate/creature/teleport/Activate()
 	var/mob/living/simple_animal/hostile/netherworld/N = owner
 	var/obj/effect/dummy/phased_mob/creature/holder = null
@@ -80,10 +80,10 @@
 		holder = new /obj/effect/dummy/phased_mob/creature(T)
 		N.forceMove(holder)
 		N.is_phased = TRUE
-		
+
 /mob/living/simple_animal/hostile/netherworld/proc/can_be_seen(turf/location)
 	// Check for darkness
-	if(location && location.lighting_object)
+	if(location && location.light_obj)
 		if(location.get_lumcount()<0.1) // No one can see us in the darkness, right?
 			return null
 
@@ -103,7 +103,7 @@
 				if(!M.occupant.eye_blind)
 					return M.occupant
 	return null
-	
+
 /mob/living/simple_animal/hostile/netherworld/migo
 	name = "mi-go"
 	desc = "A pinkish, fungoid crustacean-like creature with numerous pairs of clawed appendages and a head covered with waving antennae."

@@ -66,7 +66,7 @@
 		SSair.add_to_active(src)
 
 	if (light_power && light_range)
-		update_light()
+		set_light()
 
 	var/turf/T = SSmapping.get_turf_above(src)
 	if(T)
@@ -78,7 +78,7 @@
 		SEND_SIGNAL(T, COMSIG_TURF_MULTIZ_NEW, src, UP)
 
 	if (opacity)
-		has_opaque_atom = TRUE
+		blocks_light = TRUE
 
 	ComponentInitialize()
 
@@ -262,8 +262,8 @@
 
 	// If an opaque movable atom moves around we need to potentially update visibility.
 	if (AM.opacity)
-		has_opaque_atom = TRUE // Make sure to do this before reconsider_lights(), incase we're on instant updates. Guaranteed to be on in this case.
-		reconsider_lights()
+		blocks_light = TRUE // Make sure to do this before reconsider_lights(), incase we're on instant updates. Guaranteed to be on in this case.
+		force_light_update()
 
 /turf/open/Entered(atom/movable/AM)
 	..()

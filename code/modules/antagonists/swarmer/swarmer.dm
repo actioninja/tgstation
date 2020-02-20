@@ -656,7 +656,7 @@
 	if(!light_range)
 		set_light(3)
 	else
-		set_light(0)
+		kill_light()
 
 /mob/living/simple_animal/hostile/swarmer/proc/swarmer_chat(msg)
 	var/rendered = "<B>Swarm communication - [src]</b> [say_quote(msg)]"

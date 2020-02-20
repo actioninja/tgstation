@@ -348,7 +348,7 @@
 	after_finish_loop()
 
 /obj/machinery/microwave/proc/after_finish_loop()
-	set_light(0)
+	kill_light()
 	soundloop.stop()
 	update_icon()
 

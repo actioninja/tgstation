@@ -199,7 +199,7 @@
 			msg = blind_message
 		else if(T != loc && T != src) //if src is inside something and not a turf.
 			msg = blind_message
-		else if(T.lighting_object && T.lighting_object.invisibility <= M.see_invisible && T.is_softly_lit()) //if it is too dark.
+		else if(T.light_obj && T.light_obj.invisibility <= M.see_invisible && T.get_lumcount()) //if it is too dark.
 			msg = blind_message
 		if(!msg)
 			continue

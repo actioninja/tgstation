@@ -142,7 +142,7 @@
 			if(light_on)
 				set_light(comp_light_luminosity, 1, comp_light_color)
 			else
-				set_light(0)
+				kill_light()
 			return TRUE
 
 		if("PC_light_color")
@@ -157,7 +157,7 @@
 					new_color = null
 			comp_light_color = new_color
 			light_color = new_color
-			update_light()
+			set_light()
 			return TRUE
 		else
 			return

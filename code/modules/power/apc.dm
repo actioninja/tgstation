@@ -339,7 +339,7 @@
 		light_color = LIGHT_COLOR_BLUE
 		set_light(lon_range)
 	else
-		set_light(0)
+		kill_light()
 
 	icon_update_needed = FALSE
 

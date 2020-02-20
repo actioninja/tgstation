@@ -52,7 +52,7 @@
 /obj/machinery/computer/power_change()
 	. = ..()
 	if(machine_stat & NOPOWER)
-		set_light(0)
+		kill_light()
 	else
 		set_light(brightness_on)
 
@@ -81,7 +81,7 @@
 	. = ..()
 	if(.)
 		playsound(loc, 'sound/effects/glassbr3.ogg', 100, TRUE)
-		set_light(0)
+		kill_light()
 
 /obj/machinery/computer/emp_act(severity)
 	. = ..()

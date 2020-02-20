@@ -632,7 +632,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		hitsound = "swing_hit"
 		force = 0
 		attack_verb = null //human_defense.dm takes care of it
-		set_light(0)
+		kill_light()
 		STOP_PROCESSING(SSobj, src)
 	update_icon()
 

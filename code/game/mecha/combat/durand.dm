@@ -184,7 +184,7 @@ the shield is disabled by means other than the action button (like running out o
 		flick("shield_drop", src)
 		playsound(src, 'sound/mecha/mech_shield_drop.ogg', 50, FALSE)
 		sleep(5)
-		set_light(0)
+		kill_light()
 		icon_state = "shield_null"
 		invisibility = INVISIBILITY_MAXIMUM //no showing on right-click
 	switching = FALSE

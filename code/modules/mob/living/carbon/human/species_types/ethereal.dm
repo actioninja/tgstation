@@ -50,7 +50,7 @@
 
 /datum/species/ethereal/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	.=..()
-	C.set_light(0)
+	C.kill_light()
 	UnregisterSignal(C, COMSIG_ATOM_EMAG_ACT)
 	UnregisterSignal(C, COMSIG_ATOM_EMP_ACT)
 
@@ -71,7 +71,7 @@
 		H.set_light(1 + (2 * healthpercent), 1 + (1 * healthpercent), current_color)
 		fixed_mut_color = copytext_char(current_color, 2)
 	else
-		H.set_light(0)
+		H.kill_light()
 		fixed_mut_color = rgb(128,128,128)
 	H.update_body()
 

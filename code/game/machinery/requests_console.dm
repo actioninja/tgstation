@@ -71,7 +71,7 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 
 /obj/machinery/requests_console/update_icon_state()
 	if(machine_stat & NOPOWER)
-		set_light(0)
+		kill_light()
 	else
 		set_light(1.4,0.7,"#34D352")//green light
 	if(open)

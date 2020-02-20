@@ -381,7 +381,7 @@
 	..()
 	hitsound = "swing_hit"
 	STOP_PROCESSING(SSobj, src)
-	set_light(0)
+	kill_light()
 
 /obj/item/twohanded/dualsaber/process()
 	if(wielded)
@@ -490,8 +490,8 @@
 /obj/item/twohanded/spear/explosive/Initialize(mapload)
 	. = ..()
 	set_explosive(new /obj/item/grenade/iedcasing()) //For admin-spawned explosive lances
-	
-	
+
+
 /obj/item/twohanded/spear/explosive/proc/set_explosive(obj/item/grenade/G)
 	if(explosive)
 		QDEL_NULL(explosive)

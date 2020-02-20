@@ -216,7 +216,7 @@
 	var/bulb_colour = "#FFFFFF"	// befault colour of the light.
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = FALSE
-	var/light_type = /obj/item/light/tube		// the type of light item
+	var/bulb_type = /obj/item/light/tube		// the type of light item
 	var/fitting = "tube"
 	var/switchcount = 0			// count of number of times switched on/off
 								// this is used to calc the probability the light burns out
@@ -251,7 +251,7 @@
 	fitting = "bulb"
 	brightness = 4
 	desc = "A small lighting fixture."
-	light_type = /obj/item/light/bulb
+	bulb_type = /obj/item/light/bulb
 
 /obj/machinery/light/small/broken
 	status = LIGHT_BROKEN
@@ -359,7 +359,7 @@
 			PO = nightshift_light_power
 			if(!color)
 				CO = nightshift_light_color
-		var/matching = light && BR == light.light_range && PO == light.light_power && CO == light.light_color
+		var/matching = light_obj && BR == light_obj.light_range && PO == light_obj.light_power && CO == light_obj.light_color
 		if(!matching)
 			switchcount++
 			if(rigged)
@@ -377,7 +377,7 @@
 		START_PROCESSING(SSmachines, src)
 	else
 		use_power = IDLE_POWER_USE
-		set_light(0)
+		kill_light()
 	update_icon()
 
 	active_power_usage = (brightness * 10)
@@ -417,7 +417,7 @@
 		status = LIGHT_BURNED
 		icon_state = "[base_state]-burned"
 		on = FALSE
-		set_light(0)
+		kill_light()
 
 // attempt to set the light's on/off status
 // will not switch on if broken/burned/empty
@@ -461,7 +461,7 @@
 		else
 			src.add_fingerprint(user)
 			var/obj/item/light/L = W
-			if(istype(L, light_type))
+			if(istype(L, bulb_type))
 				if(!user.temporarilyRemoveItemFromInventory(L))
 					return
 
@@ -673,7 +673,7 @@
 	drop_light_tube(user)
 
 /obj/machinery/light/proc/drop_light_tube(mob/user)
-	var/obj/item/light/L = new light_type()
+	var/obj/item/light/L = new bulb_type()
 	L.status = status
 	L.rigged = rigged
 	L.brightness = brightness
@@ -886,5 +886,5 @@
 	icon_state = "floor"
 	brightness = 4
 	layer = 2.5
-	light_type = /obj/item/light/bulb
+	bulb_type = /obj/item/light/bulb
 	fitting = "bulb"

@@ -7,7 +7,7 @@
 		/mob/camera,
 		/obj/effect,
 		/obj/docking_port,
-		/atom/movable/lighting_object,
+		/atom/movable/light,
 		/obj/projectile,
 		))
 	var/list/processing_list = list(location)

@@ -194,7 +194,7 @@
 //Turns off the welder if there is no more fuel (does this really need to be its own proc?)
 /obj/item/weldingtool/proc/check_fuel(mob/user)
 	if(get_fuel() <= 0 && welding)
-		set_light(0)
+		kill_light()
 		switched_on(user)
 		update_icon()
 		return 0
@@ -226,7 +226,7 @@
 //Switches the welder off
 /obj/item/weldingtool/proc/switched_off(mob/user)
 	welding = 0
-	set_light(0)
+	kill_light()
 
 	force = 3
 	damtype = "brute"
