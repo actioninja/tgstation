@@ -1,6 +1,6 @@
 /atom/movable/light
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	plane = LIGHTING_MASK_PLANE
+	plane = LIGHTING_CAST_MASK_PLANE
 
 	layer = 1
 	//layer 1 = base plane layer
@@ -9,9 +9,9 @@
 	//layer 4 = light falloff overlay
 	//layer 5 = subtractive light layer
 
-	appearance_flags = KEEP_TOGETHER
-	icon = 'icons/lighting/light_range_3.dmi'
 	icon_state = "mask"
+
+	appearance_flags = KEEP_TOGETHER
 	invisibility = INVISIBILITY_LIGHTING
 	pixel_x = -WORLD_ICON_SIZE*2
 	pixel_y = -WORLD_ICON_SIZE*2
@@ -19,12 +19,13 @@
 	blend_mode = BLEND_ADD
 	anchored = TRUE
 
-	alpha = 180
-
 	var/current_power = 1
+	var/atom/movable
 	var/atom/movable/holder
 	var/point_angle
 	var/list/affecting_turfs = list()
+	var/atom/movable/light_shadow_mask/shadow_mask
+	var/atom/movable/light_wall_mask/wall_mask
 	var/list/temp_appearance
 
 /atom/movable/light/New(newholder)
@@ -43,6 +44,8 @@
 	appearance = null
 	overlays = null
 	temp_appearance = null
+	QDEL_NULL(shadow_mask)
+	QDEL_NULL(wall_mask)
 
 	if(holder)
 		if(holder.light_obj == src)

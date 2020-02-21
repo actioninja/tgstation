@@ -1,145 +1,20 @@
-#define BASE_PIXEL_OFFSET 224
-#define BASE_TURF_OFFSET 2
-#define WIDE_SHADOW_THRESHOLD 80
-#define OFFSET_MULTIPLIER_SIZE 32
-#define CORNER_OFFSET_MULTIPLIER_SIZE 16
-#define LIGHT_POWER_MULTIPLIER 240
+/atom/movable/light_shadow_mask
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	appearance_flags = KEEP_TOGETHER
+	icon_state = "blank"
+	glide_size = 256
 
-#define CHECK_OCCLUSION(TARGV, T) \
-	if (!isturf(T)) { \
-		TARGV = FALSE; \
-	} \
-	else if (T.opacity) { \
-		TARGV = TRUE; \
-	} \
-	else if (T.blocks_light == -1) { \
-		TARGV = T.check_blocks_light(); \
-	} \
-	else if (T.blocks_light) { \
-		TARGV = TRUE; \
-	}
+/atom/movable/light_shadow_mask/Initialize(mapload)
+	. = ..()
+	render_target = "*[ref(src)]"
 
-GLOBAL_LIST_EMPTY(lighting_range_cache)
-GLOBAL_LIST_EMPTY(lighting_shadow_cache)
-GLOBAL_LIST_EMPTY(lighting_shadow_icon_cache)
-GLOBAL_LIST_EMPTY(lighting_wall_cache)
-GLOBAL_VAR(lights)
+/atom/movable/light_shadow_mask/proc/cast_shadows(a_turfs, atom/movable/light_wall_mask/wall_mask)
+	//Local var for UNCONTROLLABLE SPEEEEED
+	var/list/affecting_turfs = a_turfs
 
+	var/list/temp_wall_overlays = list()
 
-// Casts shadows from occluding objects for a given light.
-
-/atom/movable/light/proc/cast_light(force_cast)
-	if(!SSlighting.initialized && !force_cast)
-		GLOB.init_lights |= src
-		return
-
-	light_color = null
-
-	temp_appearance = list()
-
-	//cap light range to 7
-	light_range = min(7, light_range)
-	var/effectivepow = light_power
-	if(effectivepow < 0)
-		effectivepow = -effectivepow
-		blend_mode = BLEND_SUBTRACT
-		layer = 5
-	else
-		blend_mode = BLEND_ADD
-		layer = 1
-
-	alpha = min(255,max(0,round(effectivepow*LIGHT_POWER_MULTIPLIER)))
-
-	if(light_type == LIGHT_SOFT_FLICKER)
-		animate(src, alpha = alpha - rand(30, 60), time = rand(1,4), loop = -1, easing = SINE_EASING)
-
-	if(!isturf(loc))
-		for(var/turf/T in affecting_turfs)
-			T.lumcount = -1
-			T.affecting_lights -= src
-		affecting_turfs.Cut()
-		return
-
-	for(var/turf/T in affecting_turfs)
-		T.lumcount = -1
-		T.affecting_lights -= src
-
-	affecting_turfs = view(light_range, src)
-
-	for(var/turf/T in affecting_turfs)
-		T.lumcount = -1
-		T.affecting_lights |= src
-
-
-	if(light_type == LIGHT_DIRECTIONAL)
-		icon = 'icons/lighting/directional_overlays.dmi'
-		light_range = 2.5
-	else
-		light_range = round(light_range)
-		pixel_x = pixel_y = -(world.icon_size * light_range)
-		switch(light_range)
-			if(1)
-				icon = 'icons/lighting/light_range_1.dmi'
-			if(2)
-				icon = 'icons/lighting/light_range_2.dmi'
-			if(3)
-				icon = 'icons/lighting/light_range_3.dmi'
-			if(4)
-				icon = 'icons/lighting/light_range_4.dmi'
-			if(5)
-				icon = 'icons/lighting/light_range_5.dmi'
-			if(6)
-				icon = 'icons/lighting/light_range_6.dmi'
-			if(7)
-				icon = 'icons/lighting/light_range_7.dmi'
-			else
-				qdel(src)
-				return
-/*
-	if (!I)
-		I = image(icon)
-		I.layer = 4
-		I.icon_state = "overlay"
-		GLOB.lighting_range_cache[icon] = I
-
-	if(light_type == LIGHT_DIRECTIONAL)
-		var/turf/next_turf = get_step(src, dir)
-		for(var/i = 1 to 3)
-			var/occluded
-			CHECK_OCCLUSION(occluded, next_turf)
-			if(occluded)
-				I.icon_state = "[I.icon_state]_[i]"
-				break
-			next_turf = get_step(next_turf, dir)
-
-	temp_appearance += I
-			*/
-
-	if(light_type == LIGHT_DIRECTIONAL)
-		follow_holder_dir()
-
-	//no shadows
-	if(light_range < 2 || light_type == LIGHT_DIRECTIONAL)
-		filters = list()
-		QDEL_NULL(shadow_mask)
-		return
-
-	if(!shadow_mask)
-		shadow_mask = new(get_turf(src))
-		wall_mask = new(get_turf(src))
-		filters += filter(type="alpha", render_source=shadow_mask.render_target, flags=MASK_INVERSE)
-		shadow_mask.filters += filter(type="alpha", render_source=wall_mask.render_target, flags=MASK_INVERSE)
-	shadow_mask.light_range = light_range
-	shadow_mask.icon = icon
-	shadow_mask.pixel_x = shadow_mask.pixel_y = pixel_x
-	shadow_mask.forceMove(get_turf(src))
-	wall_mask.icon = icon
-	wall_mask.pixel_x = wall_mask.pixel_y = pixel_x
-	wall_mask.forceMove(get_turf(src))
-	shadow_mask.cast_shadows(affecting_turfs, wall_mask)
-	return
-
-	var/mutable_appearance/I
+	vis_contents = list()
 	for(var/turf/target_turf in affecting_turfs)
 		var/occluded
 		CHECK_OCCLUSION(occluded, target_turf)
@@ -151,8 +26,8 @@ GLOBAL_VAR(lights)
 		var/y_offset = target_turf.y - y
 
 		var/shadowkey = "[x_offset]:[y_offset]:[light_range]"
-		I = GLOB.lighting_shadow_cache[shadowkey] //fast as FUCK boiiiiiiiiiiiiii
-		if(!I)
+		var/obj/effect/overlay/light_shadow/currentLS = GLOB.lighting_shadow_cache[shadowkey]
+		if(!currentLS)
 			var/num = 1
 			if((abs(x_offset) > 0 && !y_offset) || (abs(y_offset) > 0 && !x_offset))
 				num = 2
@@ -202,16 +77,18 @@ GLOBAL_VAR(lights)
 					else
 						shadowicon = 'icons/lighting/light_range_7_shadows2.dmi'
 
-			I = GLOB.lighting_shadow_icon_cache[shadowicon]
-			if (!I)
-				I = image(shadowicon)
-				I.layer = 2
-				GLOB.lighting_shadow_icon_cache[shadowicon] = new /mutable_appearance(I)
+			currentLS = new(null)
+			currentLS.icon = shadowicon
+			//I = GLOB.lighting_shadow_icon_cache[shadowicon]
+			//if (!I)
+				//I = image(shadowicon)
+				//I.layer = 2
+				//GLOB.lighting_shadow_icon_cache[shadowicon] = new /mutable_appearance(I)
 
 			if(xy_swap)
-				I.icon_state = "[abs(y_offset)]_[abs(x_offset)]"
+				currentLS.icon_state = "[abs(y_offset)]_[abs(x_offset)]"
 			else
-				I.icon_state = "[abs(x_offset)]_[abs(y_offset)]"
+				currentLS.icon_state = "[abs(x_offset)]_[abs(y_offset)]"
 
 
 			var/matrix/M = matrix()
@@ -257,11 +134,12 @@ GLOBAL_VAR(lights)
 					M.Translate(-shadowoffset / 2, shadowoffset / 2)
 
 			//apply the transform matrix
-			I.transform = M
+			currentLS.transform = M
 
 			//and add it to the lights overlays
-			GLOB.lighting_shadow_cache[shadowkey] = new /mutable_appearance(I)
-		temp_appearance += I.appearance
+			GLOB.lighting_shadow_cache[shadowkey] = currentLS
+		vis_contents += currentLS
+
 		var/targ_dir = get_dir(target_turf, src)
 
 		var/blocking_dirs = 0
@@ -273,7 +151,7 @@ GLOBAL_VAR(lights)
 				blocking_dirs |= d
 
 		var/lwc_key = "[blocking_dirs]-[targ_dir]"
-		I = GLOB.lighting_wall_cache[lwc_key]
+		var/mutable_appearance/I = GLOB.lighting_wall_cache[lwc_key]
 		if (!I)
 			I = image('icons/lighting/wall_lighting.dmi')
 			I.layer = 3
@@ -282,13 +160,50 @@ GLOBAL_VAR(lights)
 
 		I.pixel_x = (world.icon_size * light_range) + (x_offset * world.icon_size)
 		I.pixel_y = (world.icon_size * light_range) + (y_offset * world.icon_size)
+		temp_wall_overlays += I.appearance
+	wall_mask.overlays = temp_wall_overlays
 
-		temp_appearance += I.appearance
+/atom/movable/light_shadow_mask/ex_act(severity)
+	return 0
 
-	overlays = temp_appearance
-	temp_appearance.Cut()
-#undef BASE_PIXEL_OFFSET
-#undef BASE_TURF_OFFSET
-#undef WIDE_SHADOW_THRESHOLD
-#undef OFFSET_MULTIPLIER_SIZE
-#undef CORNER_OFFSET_MULTIPLIER_SIZE
+/atom/movable/light_shadow_mask/singularity_act()
+	return
+
+/atom/movable/light_shadow_mask/singularity_pull()
+	return
+
+/atom/movable/light_shadow_mask/blob_act()
+	return
+
+/atom/movable/light_shadow_mask/onTransitZ()
+	return
+
+/atom/movable/light_wall_mask
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	appearance_flags = KEEP_TOGETHER
+	icon_state = "blank"
+	glide_size = 256
+
+/atom/movable/light_wall_mask/Initialize(mapload)
+	. = ..()
+	render_target = "*[ref(src)]"
+
+
+/atom/movable/light_wall_mask/ex_act(severity)
+	return 0
+
+/atom/movable/light_wall_mask/singularity_act()
+	return
+
+/atom/movable/light_wall_mask/singularity_pull()
+	return
+
+/atom/movable/light_wall_mask/blob_act()
+	return
+
+/atom/movable/light_wall_mask/onTransitZ()
+	return
+
+/obj/effect/overlay/light_shadow
+	name = "light_shadow"
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT

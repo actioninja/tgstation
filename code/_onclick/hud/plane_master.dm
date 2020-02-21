@@ -72,14 +72,19 @@
 
 /obj/screen/plane_master/lighting/Initialize()
 	. = ..()
-	filters += filter(type="alpha", render_source="*LIGHTING_MASK", flags=MASK_INVERSE)
+	filters += filter(type="alpha", render_source="*LIGHTING_CAST_MASK", flags=MASK_INVERSE)
 
-/obj/screen/plane_master/lighting_mask
-	name = "lighting mask plane master"
-	plane = LIGHTING_MASK_PLANE
+/obj/screen/plane_master/lighting_cast_mask
+	name = "lighting cast mask plane master"
+	plane = LIGHTING_CAST_MASK_PLANE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	blend_mode = BLEND_MULTIPLY
-	render_target = "*LIGHTING_MASK"
+	render_target = "*LIGHTING_CAST_MASK"
+
+/obj/screen/plane_master/lighting_shadow_mask
+	name ="lighting shadow mask plane master"
+	plane = LIGHTING_SHADOW_MASK_PLANE
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	render_target = "*LIGHTING_SHADOW_MASK"
 
 /obj/screen/plane_master/parallax
 	name = "parallax plane master"

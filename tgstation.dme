@@ -1982,6 +1982,7 @@
 #include "code\modules\lighting\light_effect.dm"
 #include "code\modules\lighting\light_effect_cast.dm"
 #include "code\modules\lighting\light_mob.dm"
+#include "code\modules\lighting\light_shadow_mask.dm"
 #include "code\modules\lighting\light_turf.dm"
 #include "code\modules\mapping\map_template.dm"
 #include "code\modules\mapping\mapping_helpers.dm"
