@@ -1,6 +1,8 @@
 /atom/movable/light_shadow_mask
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	appearance_flags = KEEP_TOGETHER
+	plane = LIGHTING_SHADOW_MASK_PLANE
+	invisibility = INVISIBILITY_LIGHTING
 	icon_state = "blank"
 	glide_size = 256
 
@@ -13,6 +15,7 @@
 	var/list/affecting_turfs = a_turfs
 
 	var/list/temp_wall_overlays = list()
+	var/list/temp_shadow_overlays = list()
 
 	vis_contents = list()
 	for(var/turf/target_turf in affecting_turfs)
@@ -26,8 +29,8 @@
 		var/y_offset = target_turf.y - y
 
 		var/shadowkey = "[x_offset]:[y_offset]:[light_range]"
-		var/obj/effect/overlay/light_shadow/currentLS = GLOB.lighting_shadow_cache[shadowkey]
-		if(!currentLS)
+		var/mutable_appearance/I = GLOB.lighting_shadow_cache[shadowkey]
+		if(!I)
 			var/num = 1
 			if((abs(x_offset) > 0 && !y_offset) || (abs(y_offset) > 0 && !x_offset))
 				num = 2
@@ -77,18 +80,16 @@
 					else
 						shadowicon = 'icons/lighting/light_range_7_shadows2.dmi'
 
-			currentLS = new(null)
-			currentLS.icon = shadowicon
-			//I = GLOB.lighting_shadow_icon_cache[shadowicon]
-			//if (!I)
-				//I = image(shadowicon)
-				//I.layer = 2
-				//GLOB.lighting_shadow_icon_cache[shadowicon] = new /mutable_appearance(I)
+			I = GLOB.lighting_shadow_icon_cache[shadowicon]
+			if (!I)
+				I = image(shadowicon)
+				I.layer = 2
+				GLOB.lighting_shadow_icon_cache[shadowicon] = new /mutable_appearance(I)
 
 			if(xy_swap)
-				currentLS.icon_state = "[abs(y_offset)]_[abs(x_offset)]"
+				I.icon_state = "[abs(y_offset)]_[abs(x_offset)]"
 			else
-				currentLS.icon_state = "[abs(x_offset)]_[abs(y_offset)]"
+				I.icon_state = "[abs(x_offset)]_[abs(y_offset)]"
 
 
 			var/matrix/M = matrix()
@@ -134,11 +135,11 @@
 					M.Translate(-shadowoffset / 2, shadowoffset / 2)
 
 			//apply the transform matrix
-			currentLS.transform = M
+			I.transform = M
 
 			//and add it to the lights overlays
-			GLOB.lighting_shadow_cache[shadowkey] = currentLS
-		vis_contents += currentLS
+			GLOB.lighting_shadow_cache[shadowkey] = new /mutable_appearance(I)
+		temp_shadow_overlays += I.appearance
 
 		var/targ_dir = get_dir(target_turf, src)
 
@@ -151,7 +152,7 @@
 				blocking_dirs |= d
 
 		var/lwc_key = "[blocking_dirs]-[targ_dir]"
-		var/mutable_appearance/I = GLOB.lighting_wall_cache[lwc_key]
+		I = GLOB.lighting_wall_cache[lwc_key]
 		if (!I)
 			I = image('icons/lighting/wall_lighting.dmi')
 			I.layer = 3
@@ -161,6 +162,7 @@
 		I.pixel_x = (world.icon_size * light_range) + (x_offset * world.icon_size)
 		I.pixel_y = (world.icon_size * light_range) + (y_offset * world.icon_size)
 		temp_wall_overlays += I.appearance
+	overlays = temp_shadow_overlays
 	wall_mask.overlays = temp_wall_overlays
 
 /atom/movable/light_shadow_mask/ex_act(severity)
@@ -181,12 +183,9 @@
 /atom/movable/light_wall_mask
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	appearance_flags = KEEP_TOGETHER
+	plane = LIGHTING_WALL_MASK_PLANE
 	icon_state = "blank"
 	glide_size = 256
-
-/atom/movable/light_wall_mask/Initialize(mapload)
-	. = ..()
-	render_target = "*[ref(src)]"
 
 
 /atom/movable/light_wall_mask/ex_act(severity)
@@ -207,3 +206,5 @@
 /obj/effect/overlay/light_shadow
 	name = "light_shadow"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	invisibility = INVISIBILITY_LIGHTING
+	plane = LIGHTING_SHADOW_MASK_PLANE

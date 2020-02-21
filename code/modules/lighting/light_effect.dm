@@ -26,6 +26,7 @@
 	var/list/affecting_turfs = list()
 	var/atom/movable/light_shadow_mask/shadow_mask
 	var/atom/movable/light_wall_mask/wall_mask
+	var/atom/movable/light_color/color_adder
 	var/list/temp_appearance
 
 /atom/movable/light/New(newholder)
@@ -97,6 +98,10 @@
 /atom/movable/light/proc/set_dir(new_dir)
 	if(dir != new_dir)
 		dir = new_dir
+		if(shadow_mask)
+			shadow_mask.dir = new_dir
+		if(wall_mask)
+			wall_mask.dir = new_dir
 
 	if(light_type == LIGHT_DIRECTIONAL)
 		switch(dir)

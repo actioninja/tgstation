@@ -128,7 +128,6 @@ GLOBAL_VAR(lights)
 		shadow_mask = new(get_turf(src))
 		wall_mask = new(get_turf(src))
 		filters += filter(type="alpha", render_source=shadow_mask.render_target, flags=MASK_INVERSE)
-		shadow_mask.filters += filter(type="alpha", render_source=wall_mask.render_target, flags=MASK_INVERSE)
 	shadow_mask.light_range = light_range
 	shadow_mask.icon = icon
 	shadow_mask.pixel_x = shadow_mask.pixel_y = pixel_x
