@@ -7,7 +7,9 @@
 
 // Updates all appropriate lighting values and then applies all changed values
 // to the objects light_obj overlay atom.
-/atom/proc/set_light(var/l_range, var/l_power, var/l_color, var/l_type, var/fadeout)
+/atom/proc/set_light(l_range, l_power, l_color, l_type, fadeout)
+
+	var/old_range = l_range
 
 	if(!loc)
 		if(light_obj)
@@ -33,35 +35,39 @@
 	else
 		light_type = l_type
 
+	var/diff = light_range - old_range
+	var/area/A = get_area(src)
+	A.change_area_backlight(diff)
+
 	// Apply data and update light casting/bleed masking.
 	var/update_cast
 	if(!light_obj)
-		update_cast = 1
+		update_cast = TRUE
 		light_obj = new(src)
 
 	if(light_obj.light_range != l_range)
-		update_cast = 1
+		update_cast = TRUE
 		light_obj.light_range = l_range
 
 	if(light_obj.light_power != l_power)
-		update_cast = 1
+		update_cast = TRUE
 		light_obj.light_power = l_power
 
 	if(light_obj.light_color != l_color)
-		update_cast = 1
+		update_cast = TRUE
 		light_obj.light_color = l_color
 		light_obj.color = l_color
 
 	if(light_obj.current_power != l_range)
-		update_cast = 1
+		update_cast = TRUE
 		light_obj.update_transform(l_range)
 
 	if(light_obj.light_type != l_type)
-		update_cast = 1
+		update_cast = TRUE
 		light_obj.light_type = l_type
 
 	if(!light_obj.alpha)
-		update_cast = 1
+		update_cast = TRUE
 
 	// Makes sure the obj isn't somewhere weird (like inside the holder). Also calls bleed masking.
 	if(update_cast)
@@ -70,6 +76,8 @@
 	// Rare enough that we can probably get away with calling animate().
 	if(fadeout)
 		animate(light_obj, alpha = 0, time = fadeout)
+
+
 
 
 

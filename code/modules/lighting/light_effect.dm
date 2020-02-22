@@ -1,6 +1,6 @@
 /atom/movable/light
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	plane = LIGHTING_CAST_MASK_PLANE
+	plane = LIGHTING_PLANE
 
 	layer = 1
 	//layer 1 = base plane layer
@@ -9,7 +9,9 @@
 	//layer 4 = light falloff overlay
 	//layer 5 = subtractive light layer
 
-	icon_state = "mask"
+	icon_state = null
+
+	alpha = 180
 
 	appearance_flags = KEEP_TOGETHER
 	invisibility = INVISIBILITY_LIGHTING
@@ -20,13 +22,9 @@
 	anchored = TRUE
 
 	var/current_power = 1
-	var/atom/movable
 	var/atom/movable/holder
 	var/point_angle
 	var/list/affecting_turfs = list()
-	var/atom/movable/light_shadow_mask/shadow_mask
-	var/atom/movable/light_wall_mask/wall_mask
-	var/atom/movable/light_color/color_adder
 	var/list/temp_appearance
 
 /atom/movable/light/New(newholder)
@@ -45,8 +43,10 @@
 	appearance = null
 	overlays = null
 	temp_appearance = null
-	QDEL_NULL(shadow_mask)
-	QDEL_NULL(wall_mask)
+
+	if(light_range > 1)
+		var/area/A = get_area(src)
+		A.change_area_backlight(-(light_range - 1))
 
 	if(holder)
 		if(holder.light_obj == src)
@@ -59,14 +59,27 @@
 	. = ..()
 
 /atom/movable/light/Initialize()
-	..()
+	. = ..()
+	RegisterSignal(src, COMSIG_ENTER_AREA, .proc/add_light_to_area)
+	RegisterSignal(src, COMSIG_EXIT_AREA, .proc/remove_light_from_area)
+	if(light_range > 1)
+		var/area/A = get_area(src)
+		A.change_area_backlight(light_range - 1)
 	if(holder)
 		follow_holder()
+
+/atom/movable/light/proc/add_light_to_area(datum/source, area/A)
+	if(light_range > 1)
+		A.change_area_backlight(light_range - 1)
+
+/atom/movable/light/proc/remove_light_from_area(datum/source, area/A)
+	if(light_range > 1)
+		A.change_area_backlight(-(light_range - 1))
 
 // Applies power value to size (via Scale()) and updates the current rotation (via Turn())
 // angle for directional lights. This is only ever called before cast_light() so affected turfs
 // are updated elsewhere.
-/atom/movable/light/proc/update_transform(var/newrange)
+/atom/movable/light/proc/update_transform(newrange)
 	if(!isnull(newrange) && current_power != newrange)
 		current_power = newrange
 
@@ -98,10 +111,6 @@
 /atom/movable/light/proc/set_dir(new_dir)
 	if(dir != new_dir)
 		dir = new_dir
-		if(shadow_mask)
-			shadow_mask.dir = new_dir
-		if(wall_mask)
-			wall_mask.dir = new_dir
 
 	if(light_type == LIGHT_DIRECTIONAL)
 		switch(dir)

@@ -125,6 +125,8 @@
 		N.plane = overlay_plane
 		N.icon = 'icons/effects/weather_effects.dmi'
 		N.color = weather_color
+		N.alpha = 255
+		N.cut_overlay(/obj/effect/fullbright)
 		switch(stage)
 			if(STARTUP_STAGE)
 				N.icon_state = telegraph_overlay
@@ -139,3 +141,5 @@
 				N.layer = initial(N.layer)
 				N.plane = initial(N.plane)
 				N.set_opacity(FALSE)
+				N.add_overlay(/obj/effect/fullbright)
+				N.change_area_backlight(0)

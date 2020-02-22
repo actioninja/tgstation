@@ -70,38 +70,6 @@
 	blend_mode = BLEND_MULTIPLY
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
-/obj/screen/plane_master/lighting/Initialize()
-	. = ..()
-	filters += filter(type="alpha", render_source=LIGHTING_CAST_MASK_RENDER_TARGET, flags=MASK_INVERSE)
-
-/obj/screen/plane_master/lighting_color
-	name = "lighting plane master"
-	plane = LIGHTING_COLOR_PLANE
-	screen_loc = "CENTER"
-	blend_mode = BLEND_MULTIPLY
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-
-/obj/screen/plane_master/lighting_cast_mask
-	name = "lighting cast mask plane master"
-	plane = LIGHTING_CAST_MASK_PLANE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	render_target = LIGHTING_CAST_MASK_RENDER_TARGET
-
-/obj/screen/plane_master/lighting_shadow_mask
-	name = "lighting shadow mask plane master"
-	plane = LIGHTING_SHADOW_MASK_PLANE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-
-/obj/screen/plane_master/lighting_shadow_mask/Initialize()
-	. = ..()
-	filters += filter(type="alpha", render_source=LIGHTING_WALL_MASK_RENDER_TARGET, flags=MASK_INVERSE)
-
-/obj/screen/plane_master/lighting_wall_mask
-	name = "lighting wall mask plane master"
-	plane = LIGHTING_WALL_MASK_PLANE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	render_target = LIGHTING_WALL_MASK_RENDER_TARGET
-
 /obj/screen/plane_master/parallax
 	name = "parallax plane master"
 	plane = PLANE_SPACE_PARALLAX
@@ -114,7 +82,7 @@
 
 /obj/screen/plane_master/lighting/backdrop(mob/mymob)
 	mymob.overlay_fullscreen("lighting_backdrop_lit", /obj/screen/fullscreen/lighting_backdrop/lit)
-	//mymob.overlay_fullscreen("lighting_backdrop_unlit", /obj/screen/fullscreen/lighting_backdrop/unlit)
+	mymob.overlay_fullscreen("lighting_backdrop_unlit", /obj/screen/fullscreen/lighting_backdrop/unlit)
 
 /obj/screen/plane_master/camera_static
 	name = "camera static plane master"

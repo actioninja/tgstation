@@ -1,3 +1,10 @@
+/obj/effect/overlay/light_shadow
+	name = "light_shadow"
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	invisibility = INVISIBILITY_LIGHTING
+	plane = LIGHTING_PLANE
+	alpha = 200
+
 #define BASE_PIXEL_OFFSET 224
 #define BASE_TURF_OFFSET 2
 #define WIDE_SHADOW_THRESHOLD 80
@@ -25,10 +32,9 @@ GLOBAL_LIST_EMPTY(lighting_shadow_icon_cache)
 GLOBAL_LIST_EMPTY(lighting_wall_cache)
 GLOBAL_VAR(lights)
 
-
 // Casts shadows from occluding objects for a given light.
 
-/atom/movable/light/proc/cast_light(force_cast)
+/atom/movable/light/proc/cast_light(var/force_cast)
 	if(!SSlighting.initialized && !force_cast)
 		GLOB.init_lights |= src
 		return
@@ -36,6 +42,7 @@ GLOBAL_VAR(lights)
 	light_color = null
 
 	temp_appearance = list()
+	vis_contents = list()
 
 	//cap light range to 7
 	light_range = min(7, light_range)
@@ -68,18 +75,20 @@ GLOBAL_VAR(lights)
 
 	for(var/turf/T in affecting_turfs)
 		T.lumcount = -1
-		T.affecting_lights |= src
+		T.affecting_lights += src
 
 
 	if(light_type == LIGHT_DIRECTIONAL)
 		icon = 'icons/lighting/directional_overlays.dmi'
 		light_range = 2.5
 	else
-		light_range = round(light_range)
 		pixel_x = pixel_y = -(world.icon_size * light_range)
+		light_range = round(light_range)
 		switch(light_range)
 			if(1)
 				icon = 'icons/lighting/light_range_1.dmi'
+				pixel_x += holder.pixel_x
+				pixel_y += holder.pixel_y
 			if(2)
 				icon = 'icons/lighting/light_range_2.dmi'
 			if(3)
@@ -95,12 +104,17 @@ GLOBAL_VAR(lights)
 			else
 				qdel(src)
 				return
-/*
-	if (!I)
-		I = image(icon)
-		I.layer = 4
-		I.icon_state = "overlay"
-		GLOB.lighting_range_cache[icon] = I
+
+	icon_state = "white"
+
+	var/obj/effect/overlay/light_shadow/ls_overlay = GLOB.lighting_range_cache[icon]
+	if (!ls_overlay)
+		ls_overlay = new /obj/effect/overlay/light_shadow(null)
+		ls_overlay.icon = icon
+		ls_overlay.layer = 4
+		ls_overlay.icon_state = "overlay"
+		ls_overlay.alpha = 255
+		GLOB.lighting_range_cache[icon] = ls_overlay
 
 	if(light_type == LIGHT_DIRECTIONAL)
 		var/turf/next_turf = get_step(src, dir)
@@ -108,35 +122,18 @@ GLOBAL_VAR(lights)
 			var/occluded
 			CHECK_OCCLUSION(occluded, next_turf)
 			if(occluded)
-				I.icon_state = "[I.icon_state]_[i]"
+				ls_overlay.icon_state = "[ls_overlay.icon_state]_[i]"
 				break
 			next_turf = get_step(next_turf, dir)
 
-	temp_appearance += I
-			*/
+	vis_contents += ls_overlay
 
 	if(light_type == LIGHT_DIRECTIONAL)
 		follow_holder_dir()
 
 	//no shadows
 	if(light_range < 2 || light_type == LIGHT_DIRECTIONAL)
-		filters = list()
-		QDEL_NULL(shadow_mask)
 		return
-
-	if(!shadow_mask)
-		shadow_mask = new(get_turf(src))
-		wall_mask = new(get_turf(src))
-		filters += filter(type="alpha", render_source=shadow_mask.render_target, flags=MASK_INVERSE)
-	shadow_mask.light_range = light_range
-	shadow_mask.icon = icon
-	shadow_mask.pixel_x = shadow_mask.pixel_y = pixel_x
-	shadow_mask.forceMove(get_turf(src))
-	wall_mask.icon = icon
-	wall_mask.pixel_x = wall_mask.pixel_y = pixel_x
-	wall_mask.forceMove(get_turf(src))
-	shadow_mask.cast_shadows(affecting_turfs, wall_mask)
-	return
 
 	var/mutable_appearance/I
 	for(var/turf/target_turf in affecting_turfs)
@@ -150,8 +147,8 @@ GLOBAL_VAR(lights)
 		var/y_offset = target_turf.y - y
 
 		var/shadowkey = "[x_offset]:[y_offset]:[light_range]"
-		I = GLOB.lighting_shadow_cache[shadowkey] //fast as FUCK boiiiiiiiiiiiiii
-		if(!I)
+		ls_overlay = GLOB.lighting_shadow_cache[shadowkey] //fast as FUCK boiiiiiiiiiiiiii
+		if(!ls_overlay)
 			var/num = 1
 			if((abs(x_offset) > 0 && !y_offset) || (abs(y_offset) > 0 && !x_offset))
 				num = 2
@@ -201,16 +198,14 @@ GLOBAL_VAR(lights)
 					else
 						shadowicon = 'icons/lighting/light_range_7_shadows2.dmi'
 
-			I = GLOB.lighting_shadow_icon_cache[shadowicon]
-			if (!I)
-				I = image(shadowicon)
-				I.layer = 2
-				GLOB.lighting_shadow_icon_cache[shadowicon] = new /mutable_appearance(I)
+			ls_overlay = new /obj/effect/overlay/light_shadow(null)
+			ls_overlay.icon = shadowicon
+			ls_overlay.layer = 2
 
 			if(xy_swap)
-				I.icon_state = "[abs(y_offset)]_[abs(x_offset)]"
+				ls_overlay.icon_state = "[abs(y_offset)]_[abs(x_offset)]"
 			else
-				I.icon_state = "[abs(x_offset)]_[abs(y_offset)]"
+				ls_overlay.icon_state = "[abs(x_offset)]_[abs(y_offset)]"
 
 
 			var/matrix/M = matrix()
@@ -256,11 +251,12 @@ GLOBAL_VAR(lights)
 					M.Translate(-shadowoffset / 2, shadowoffset / 2)
 
 			//apply the transform matrix
-			I.transform = M
+			ls_overlay.transform = M
 
 			//and add it to the lights overlays
-			GLOB.lighting_shadow_cache[shadowkey] = new /mutable_appearance(I)
-		temp_appearance += I.appearance
+			GLOB.lighting_shadow_cache[shadowkey] = ls_overlay
+		vis_contents += ls_overlay
+
 		var/targ_dir = get_dir(target_turf, src)
 
 		var/blocking_dirs = 0
@@ -283,9 +279,8 @@ GLOBAL_VAR(lights)
 		I.pixel_y = (world.icon_size * light_range) + (y_offset * world.icon_size)
 
 		temp_appearance += I.appearance
-
 	overlays = temp_appearance
-	temp_appearance.Cut()
+
 #undef BASE_PIXEL_OFFSET
 #undef BASE_TURF_OFFSET
 #undef WIDE_SHADOW_THRESHOLD

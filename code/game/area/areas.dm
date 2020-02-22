@@ -77,6 +77,9 @@
 	/// typecache to limit the areas that atoms in this area can smooth with, used for shuttles IIRC
 	var/list/canSmoothWithAreas
 
+	var/total_light = 0
+	var/ambient_lighting = TRUE
+
 /**
   * A list of teleport locations
   *
@@ -151,8 +154,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 
 	blend_mode = BLEND_MULTIPLY // Putting this in the constructor so that it stops the icons being screwed up in the map editor.
 
-	if(!IS_DYNAMIC_LIGHTING(src))
-		add_overlay(/obj/effect/fullbright)
+	add_overlay(/obj/effect/fullbright)
 
 	reg_in_areas_in_z()
 
@@ -651,3 +653,13 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 /// A hook so areas can modify the incoming args (of what??)
 /area/proc/PlaceOnTopReact(list/new_baseturfs, turf/fake_turf_type, flags)
 	return flags
+
+/area/proc/change_area_backlight(amount)
+	total_light += amount
+	if(!dynamic_lighting)
+		alpha = 255
+		return
+	//if(ambient_lighting)
+		//alpha = min(100, (total_light * 5))
+	//else
+	alpha = 0

@@ -62,6 +62,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	valid_territory = FALSE
 	ambientsounds = MINING
 	flags_1 = CAN_BE_DIRTY_1
+	ambient_lighting = FALSE
 
 /area/asteroid/nearstation
 	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
@@ -80,6 +81,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/maintenance
 	ambientsounds = MAINTENANCE
 	valid_territory = FALSE
+	ambient_lighting = FALSE
 
 
 //Departments

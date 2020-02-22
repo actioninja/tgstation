@@ -52,6 +52,14 @@
 	layer = LIGHTING_LAYER
 	blend_mode = BLEND_ADD
 
+/// Used for the ambient light level
+/obj/effect/ambientlevel
+	icon = 'icons/effects/alphacolors.dmi'
+	icon_state = "white"
+	plane = LIGHTING_PLANE
+	layer = LIGHTING_LAYER
+	blend_mode = BLEND_ADD
+
 /obj/effect/abstract/marker
 	name = "marker"
 	icon = 'icons/effects/effects.dmi'
