@@ -20,6 +20,8 @@ SUBSYSTEM_DEF(tgui)
 	var/list/open_uis = list()
 	/// A list of open UIs, grouped by src_object.
 	var/list/open_uis_by_src = list()
+	var/list/input_results = list()
+	var/list/input_options_storage = list()
 	/// The HTML base used for all UIs.
 	var/basehtml
 

@@ -411,7 +411,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		var/area/A = V
 		if(!A.hidden)
 			filtered += A
-	var/area/thearea  = input("Area to jump to", "BOOYEA") as null|anything in filtered
+	var/area/thearea  = tgui_input(src, src, "Area to jump to", TGUI_INPUT_LIST, filtered)
 
 	if(!thearea)
 		return

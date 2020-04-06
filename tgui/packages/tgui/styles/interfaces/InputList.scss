@@ -1,0 +1,63 @@
+@use '../colors.scss';
+
+$color-background: rgba(0, 0, 0, 0.33) !default;
+$color-danger: colors.bg(colors.$red) !default;
+
+.InputList__top {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 220px;
+  width: 100%;
+  background-color: $color-background;
+}
+.InputList__buttons {
+  position: absolute;
+  top: 220px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.InputList__button {
+  text-align: center;
+  font-size: 20px;
+  padding-top: 12px;
+  height: 80px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  transition: color 50ms, background-color 50ms;
+
+  &:hover {
+    transition: color 0ms, background-color 0ms;
+  }
+
+  &:focus {
+    transition: color 100ms, background-color 100ms;
+  }
+}
+
+.InputList__button--cancel {
+  &:hover,
+  &:focus {
+    background-color: $color-danger;
+  }
+}
+
+.InputList__button--select {
+  &:hover,
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.InputList__button--select-disabled {
+  color: rgba(255, 255, 255, 0.15);
+}

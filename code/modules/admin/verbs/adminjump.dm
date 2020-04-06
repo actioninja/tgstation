@@ -83,12 +83,13 @@
 
 	var/list/keys = list()
 	for(var/mob/M in GLOB.player_list)
-		keys += M.client
-	var/client/selection = input("Please, select a player!", "Admin Jumping", null, null) as null|anything in sortKey(keys)
+		keys[M.client.ckey] += M.client
+	var/selection = tgui_input(src, mob, "Jump to Key", TGUI_INPUT_LIST, sortList(keys))
 	if(!selection)
 		to_chat(src, "No keys found.", confidential = TRUE)
 		return
-	var/mob/M = selection.mob
+	var/client/result = keys[selection]
+	var/mob/M = result.mob
 	log_admin("[key_name(usr)] jumped to [key_name(M)]")
 	message_admins("[key_name_admin(usr)] jumped to [ADMIN_LOOKUPFLW(M)]")
 

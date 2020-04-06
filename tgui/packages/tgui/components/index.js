@@ -23,6 +23,7 @@ export { Input } from './Input';
 export { Knob } from './Knob';
 export { LabeledControls } from './LabeledControls';
 export { LabeledList } from './LabeledList';
+export { ListView } from './ListView';
 export { Modal } from './Modal';
 export { NoticeBox } from './NoticeBox';
 export { NumberInput } from './NumberInput';

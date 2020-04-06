@@ -286,6 +286,8 @@
 		if("log")
 			if(href_list["fatal"])
 				close(can_be_suspended = FALSE)
+		if("tgui:inputcallback")
+			SStgui.receive_input_callback(src, params["result"])
 		if("setSharedState")
 			if(status != UI_INTERACTIVE)
 				return

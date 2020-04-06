@@ -28,6 +28,7 @@
 @include meta.load-css('./components/Input.scss');
 @include meta.load-css('./components/Knob.scss');
 @include meta.load-css('./components/LabeledList.scss');
+@include meta.load-css('./components/ListView.scss');
 @include meta.load-css('./components/Modal.scss');
 @include meta.load-css('./components/NoticeBox.scss');
 @include meta.load-css('./components/NumberInput.scss');
@@ -41,6 +42,7 @@
 
 // Interfaces
 @include meta.load-css('./interfaces/CameraConsole.scss');
+@include meta.load-css('./interfaces/InputList.scss');
 @include meta.load-css('./interfaces/NuclearBomb.scss');
 @include meta.load-css('./interfaces/Roulette.scss');
 
