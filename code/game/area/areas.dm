@@ -15,7 +15,7 @@
 
 	var/area_flags = VALID_TERRITORY | BLOBS_ALLOWED | UNIQUE_AREA
 
-	var/fire = null
+	var/fire = FALSE
 	///Whether there is an atmos alarm in this area
 	var/atmosalm = FALSE
 	var/poweralm = FALSE
@@ -67,7 +67,7 @@
 
 	/// Wire assignment for airlocks in this area
 	var/airlock_wires = /datum/wires/airlock
-    
+
 	///This datum, if set, allows terrain generation behavior to be ran on Initialize()
 	var/datum/map_generator/map_generator
 
@@ -405,7 +405,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	for(var/alarm in firealarms)
 		var/obj/machinery/firealarm/F = alarm
-		F.update_fire_light(fire)
+		F.set_light_on(fire)
 	for(var/obj/machinery/light/L in src)
 		L.update()
 
@@ -419,7 +419,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	for(var/alarm in firealarms)
 		var/obj/machinery/firealarm/F = alarm
-		F.update_fire_light(fire)
+		F.set_light_on(fire)
 	for(var/obj/machinery/light/L in src)
 		L.update()
 

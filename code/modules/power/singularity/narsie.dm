@@ -13,6 +13,7 @@
 	grav_pull = 5 //How many tiles out do we pull?
 	consume_range = 6 //How many tiles out do we eat
 	light_power = 0.7
+	light_system = MOVABLE_LIGHT
 	light_range = 15
 	light_color = COLOR_RED
 	gender = FEMALE

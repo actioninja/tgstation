@@ -26,6 +26,11 @@
 	dissipate = FALSE
 	dissipate_delay = 5
 	dissipate_strength = 1
+	light_system = MOVABLE_LIGHT
+	light_range = 6
+	light_power = 3
+	light_color = COLOR_TESLA_BALL_BLUE
+
 	var/list/orbiting_balls = list()
 	var/miniball = FALSE
 	var/produced_power
@@ -35,9 +40,8 @@
 
 /obj/singularity/energy_ball/Initialize(mapload, starting_energy = 50, is_miniball = FALSE)
 	miniball = is_miniball
-	. = ..()
-	if(!is_miniball)
-		set_light(10, 7, "#5e5edd")
+	return ..()
+
 
 /obj/singularity/energy_ball/ex_act(severity, target)
 	return

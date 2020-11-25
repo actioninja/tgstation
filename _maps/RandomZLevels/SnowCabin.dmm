@@ -151,8 +151,8 @@
 /area/awaymission/cabin)
 "ax" = (
 /obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
+	light_power = 1;
+	light_range = 4
 	},
 /turf/closed/wall/mineral/wood,
 /area/awaymission/cabin)
@@ -752,8 +752,8 @@
 	dir = 1
 	},
 /obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
+	light_power = 1;
+	light_range = 4
 	},
 /turf/open/floor/wood/cold,
 /area/awaymission/cabin)
@@ -1146,8 +1146,8 @@
 /area/awaymission/cabin/snowforest)
 "dB" = (
 /obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
+	light_power = 1;
+	light_range = 4
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/cabin)
@@ -1352,8 +1352,8 @@
 /area/awaymission/cabin/snowforest)
 "el" = (
 /obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
+	light_power = 1;
+	light_range = 4
 	},
 /turf/open/floor/wood/cold,
 /area/awaymission/cabin)
@@ -1368,8 +1368,8 @@
 	dir = 4
 	},
 /obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
+	light_power = 1;
+	light_range = 4
 	},
 /turf/open/floor/wood/cold,
 /area/awaymission/cabin)
@@ -1382,8 +1382,8 @@
 /area/awaymission/cabin)
 "ep" = (
 /obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
+	light_power = 1;
+	light_range = 4
 	},
 /turf/open/floor/plating/snowed/temperatre,
 /area/awaymission/cabin)
@@ -1398,8 +1398,8 @@
 "er" = (
 /obj/effect/turf_decal/weather/snow/corner,
 /obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
+	light_power = 1;
+	light_range = 4
 	},
 /turf/open/floor/plating/snowed/temperatre,
 /area/awaymission/cabin)
@@ -1919,8 +1919,8 @@
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plasteel/dark,
 /area/awaymission/cabin/caves/mountain)
@@ -1976,8 +1976,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plasteel/dark,
 /area/awaymission/cabin/caves/mountain)
@@ -2009,8 +2009,8 @@
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plasteel/dark,
 /area/awaymission/cabin/caves/mountain)
@@ -2180,8 +2180,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/indestructible,
 /area/awaymission/cabin/caves/mountain)
@@ -2254,8 +2254,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/indestructible,
 /area/awaymission/cabin/caves/mountain)
@@ -2331,8 +2331,8 @@
 "go" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/engine,
@@ -2392,8 +2392,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/indestructible{
 	icon_state = "plating";
@@ -2469,8 +2469,8 @@
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /obj/structure/signpost/salvation{
 	density = 0;
@@ -2500,8 +2500,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plasteel/dark,
 /area/awaymission/cabin/caves/mountain)
@@ -3973,24 +3973,24 @@
 /obj/structure/barricade/wooden/crude/snow,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/cabin/caves)
 "kw" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/ice/smooth,
 /area/awaymission/cabin/caves)
 "kx" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/cabin/caves)
@@ -4002,8 +4002,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/cabin/caves)
@@ -4260,8 +4260,8 @@
 "kV" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /obj/effect/decal/remains/human,
 /turf/open/floor/plating/asteroid/snow,
@@ -4608,8 +4608,8 @@
 "lP" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/closed/wall/ice,
 /area/awaymission/cabin/caves)
@@ -4651,8 +4651,8 @@
 "lX" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow{
 	name = "packed snow";
@@ -4669,8 +4669,8 @@
 /obj/effect/decal/cleanable/blood,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow{
 	name = "packed snow";
@@ -4697,8 +4697,8 @@
 "md" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /obj/structure/flora/tree/pine,
 /turf/open/floor/plating/asteroid/snow,
@@ -4755,8 +4755,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/cabin/caves)
@@ -4770,8 +4770,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/cabin/caves)
@@ -4798,8 +4798,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/cabin/caves)
@@ -4809,8 +4809,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/cabin/caves)
@@ -4831,8 +4831,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/cabin/caves)
@@ -4843,8 +4843,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/cabin/caves)
@@ -4855,24 +4855,24 @@
 /obj/structure/fence,
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/cabin/caves)
 "mu" = (
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/cabin/caves)
 "mv" = (
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/cabin/caves)
@@ -4897,16 +4897,16 @@
 /obj/structure/fence/end,
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/cabin/caves)
 "mA" = (
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/closed/wall/ice,
 /area/awaymission/cabin/caves)
@@ -4917,8 +4917,8 @@
 /obj/item/flashlight/flare,
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/cabin/caves)
@@ -4933,8 +4933,8 @@
 "mE" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/closed/indestructible/rock/snow,
 /area/awaymission/cabin/caves)
@@ -5105,8 +5105,8 @@
 "ng" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /obj/structure/ladder/unbreakable{
 	alpha = 0;

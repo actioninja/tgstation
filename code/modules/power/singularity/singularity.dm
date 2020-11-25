@@ -9,6 +9,7 @@
 	density = TRUE
 	move_resist = INFINITY
 	layer = MASSIVE_OBJ_LAYER
+	light_system = MOVABLE_LIGHT
 	light_range = 6
 	appearance_flags = LONG_GLIDE
 	var/current_size = 1
@@ -352,8 +353,6 @@
 		desc = "[initial(desc)] It glows fiercely with inner fire."
 		name = "supermatter-charged [initial(name)]"
 		consumedSupermatter = 1
-		set_light(10)
-	return
 
 
 /obj/singularity/proc/move(force_move = 0)

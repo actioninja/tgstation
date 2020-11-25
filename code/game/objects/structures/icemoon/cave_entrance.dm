@@ -75,6 +75,7 @@ GLOBAL_LIST_INIT(ore_probability, list(/obj/item/stack/ore/uranium = 50,
 	desc = "A portal that goes to another world, normal creatures couldn't survive there."
 	icon_state = "nether"
 	mob_types = list(/mob/living/simple_animal/hostile/asteroid/ice_demon)
+	light_system = STATIC_LIGHT
 	light_range = 1
 	light_color = COLOR_SOFT_RED
 
