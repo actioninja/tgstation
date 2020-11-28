@@ -45,6 +45,7 @@
 	plane = FLOOR_PLANE
 	appearance_flags = PLANE_MASTER
 	blend_mode = BLEND_OVERLAY
+	render_target = FLOOR_PLANE_RENDER_TARGET
 
 /atom/movable/screen/plane_master/floor/backdrop(mob/mymob)
 	filters = list()
@@ -70,8 +71,8 @@
 /atom/movable/screen/plane_master/lighting
 	name = "lighting plane master"
 	plane = LIGHTING_PLANE
-	blend_mode = BLEND_MULTIPLY
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	render_target = LIGHTING_RENDER_TARGET
 
 /atom/movable/screen/plane_master/lighting/backdrop(mob/mymob)
 	mymob.overlay_fullscreen("lighting_backdrop_lit", /atom/movable/screen/fullscreen/lighting_backdrop/lit)
@@ -82,6 +83,29 @@
 	filters += filter(type="alpha", render_source = EMISSIVE_RENDER_TARGET, flags = MASK_INVERSE)
 	filters += filter(type="alpha", render_source = EMISSIVE_UNBLOCKABLE_RENDER_TARGET, flags = MASK_INVERSE)
 	filters += filter(type="alpha", render_source = O_LIGHTING_VISUAL_RENDER_TARGET, flags = MASK_INVERSE)
+
+/atom/movable/screen/plane_master/floor_lighting
+	name = "floor lighting plane master"
+	plane = LIGHTING_FLOOR_PLANE
+	blend_mode = BLEND_MULTIPLY
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	render_source = LIGHTING_RENDER_TARGET
+
+/atom/movable/screen/plane_master/floor_lighting/Initialize(mapload)
+	. = ..()
+	filters += filter(type="alpha", render_source = FLOOR_PLANE_RENDER_TARGET)
+
+/atom/movable/screen/plane_master/wall_lighting
+	name = "wall lighting plane master"
+	plane = LIGHTING_WALL_PLANE
+	blend_mode = BLEND_MULTIPLY
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	render_source = LIGHTING_RENDER_TARGET
+
+/atom/movable/screen/plane_master/wall_lighting/Initialize(mapload)
+	. = ..()
+	filters += filter(type="blur", size = 16)
+	filters += filter(type="alpha", render_source = FLOOR_PLANE_RENDER_TARGET, flags = MASK_INVERSE)
 
 /**
   * Things placed on this mask the lighting plane. Doesn't render directly.
