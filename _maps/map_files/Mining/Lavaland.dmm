@@ -1755,7 +1755,9 @@
 	dir = 8;
 	id = "mining_internal"
 	},
-/obj/structure/plasticflaps,
+/obj/structure/plasticflaps{
+	dir = 4
+	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
@@ -3566,7 +3568,9 @@
 	id = "gulag"
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/plasticflaps,
+/obj/structure/plasticflaps{
+	dir = 4
+	},
 /turf/open/floor/plating,
 /area/mine/laborcamp)
 "ob" = (
