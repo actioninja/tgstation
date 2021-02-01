@@ -2205,6 +2205,7 @@
 /area/security/brig)
 "afP" = (
 /obj/structure/extinguisher_cabinet{
+	dir = 8;
 	pixel_x = 27
 	},
 /obj/machinery/suit_storage_unit/security,
@@ -2653,6 +2654,7 @@
 	dir = 1
 	},
 /obj/structure/extinguisher_cabinet{
+	dir = 4;
 	pixel_x = -27
 	},
 /turf/open/floor/plasteel,
@@ -3379,6 +3381,7 @@
 /area/maintenance/fore)
 "aiQ" = (
 /obj/structure/extinguisher_cabinet{
+	dir = 4;
 	pixel_x = -27
 	},
 /obj/effect/turf_decal/tile/neutral{
@@ -5357,6 +5360,7 @@
 /obj/item/reagent_containers/glass/bottle/multiver,
 /obj/item/reagent_containers/syringe,
 /obj/structure/extinguisher_cabinet{
+	dir = 4;
 	pixel_x = -27
 	},
 /obj/effect/turf_decal/trimline/blue/filled/line{
@@ -8847,6 +8851,7 @@
 /area/security/brig)
 "axv" = (
 /obj/structure/extinguisher_cabinet{
+	dir = 8;
 	pixel_x = 27
 	},
 /obj/effect/turf_decal/trimline/red/filled/corner{
@@ -13770,12 +13775,6 @@
 /area/security/courtroom)
 "aJZ" = (
 /obj/structure/table/wood,
-/obj/item/radio/intercom{
-	broadcasting = 1;
-	dir = 8;
-	listening = 0;
-	name = "Station Intercom (Court)"
-	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -15544,7 +15543,7 @@
 /obj/machinery/button/door{
 	id = "lawyer_shutters";
 	name = "law office shutters control";
-	pixel_y = -26;
+	pixel_y = -24;
 	req_access_txt = "38"
 	},
 /obj/item/paper_bin{
@@ -16559,7 +16558,7 @@
 	dir = 4
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_y = 27
 	},
 /obj/item/kirbyplants{
 	icon_state = "plant-03"
@@ -18935,9 +18934,6 @@
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
 "aWk" = (
-/obj/structure/extinguisher_cabinet{
-	pixel_x = 27
-	},
 /obj/item/kirbyplants{
 	icon_state = "plant-16"
 	},
@@ -24722,6 +24718,7 @@
 /area/crew_quarters/heads/captain/private)
 "bjl" = (
 /obj/structure/extinguisher_cabinet{
+	dir = 4;
 	pixel_x = -27
 	},
 /obj/structure/disposalpipe/segment,
@@ -27809,7 +27806,7 @@
 	dir = 8
 	},
 /obj/item/radio/intercom{
-	dir = 8;
+	dir = 4;
 	pixel_x = -28
 	},
 /turf/open/floor/plasteel,
@@ -31032,6 +31029,7 @@
 /area/crew_quarters/heads/captain/private)
 "bAf" = (
 /obj/item/radio/intercom{
+	dir = 1;
 	pixel_y = -26
 	},
 /turf/open/floor/carpet,
@@ -33064,6 +33062,7 @@
 /obj/machinery/light,
 /obj/effect/landmark/event_spawn,
 /obj/item/radio/intercom{
+	dir = 1;
 	pixel_y = -25
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer4{
@@ -34321,6 +34320,7 @@
 /area/maintenance/port)
 "bJt" = (
 /obj/item/radio/intercom{
+	dir = 4;
 	pixel_x = -29
 	},
 /obj/machinery/light/small{
@@ -36927,6 +36927,7 @@
 	pixel_y = 2
 	},
 /obj/structure/extinguisher_cabinet{
+	dir = 4;
 	pixel_x = -27
 	},
 /obj/effect/turf_decal/tile/neutral{
@@ -41553,6 +41554,7 @@
 	network = list("ss13","medbay")
 	},
 /obj/item/radio/intercom{
+	dir = 4;
 	pixel_x = -28
 	},
 /obj/effect/turf_decal/tile/blue{
@@ -44506,7 +44508,7 @@
 /area/medical/pharmacy)
 "clx" = (
 /obj/structure/extinguisher_cabinet{
-	dir = 8;
+	dir = 4;
 	pixel_x = -27
 	},
 /obj/effect/turf_decal/tile/neutral{
@@ -46162,6 +46164,7 @@
 /area/maintenance/department/medical/central)
 "crF" = (
 /obj/item/radio/intercom{
+	dir = 4;
 	pixel_x = -29
 	},
 /obj/effect/turf_decal/tile/yellow{
@@ -46688,6 +46691,7 @@
 "cuq" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/extinguisher_cabinet{
+	dir = 8;
 	pixel_x = 27
 	},
 /obj/machinery/light{
@@ -50712,6 +50716,7 @@
 	dir = 8
 	},
 /obj/structure/extinguisher_cabinet{
+	dir = 4;
 	pixel_x = -27
 	},
 /obj/item/kirbyplants{
@@ -51837,10 +51842,6 @@
 "cTk" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
-	},
-/obj/item/radio/intercom{
-	dir = 1;
-	pixel_y = -29
 	},
 /obj/effect/turf_decal/stripes/line,
 /obj/structure/cable,
@@ -53314,6 +53315,9 @@
 /obj/machinery/portable_atmospherics/canister/bz,
 /obj/machinery/atmospherics/components/unary/portables_connector/visible{
 	dir = 4
+	},
+/obj/item/radio/intercom{
+	pixel_y = 20
 	},
 /turf/open/floor/plasteel,
 /area/science/xenobiology)
@@ -56239,6 +56243,21 @@
 /obj/structure/table,
 /turf/open/floor/plasteel,
 /area/crew_quarters/bar)
+"dDc" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer4{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer2{
+	dir = 8
+	},
+/obj/structure/extinguisher_cabinet{
+	pixel_y = 27
+	},
+/turf/open/floor/plasteel,
+/area/hallway/primary/central)
 "dDf" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/event_spawn,
@@ -56999,7 +57018,7 @@
 	pixel_y = -13
 	},
 /obj/structure/extinguisher_cabinet{
-	dir = 8;
+	dir = 4;
 	pixel_x = -24;
 	pixel_y = 3
 	},
@@ -69615,6 +69634,7 @@
 /obj/effect/turf_decal/tile/green,
 /obj/machinery/light,
 /obj/item/radio/intercom{
+	dir = 1;
 	pixel_y = -28
 	},
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
@@ -77498,6 +77518,7 @@
 	},
 /obj/effect/turf_decal/tile/green,
 /obj/item/radio/intercom{
+	dir = 8;
 	pixel_x = 28
 	},
 /turf/open/floor/plasteel/white,
@@ -77600,7 +77621,7 @@
 	pixel_x = 24
 	},
 /obj/machinery/light{
-	dir = 4
+	dir = 8
 	},
 /obj/item/clothing/gloves/color/fyellow,
 /obj/item/gps,
@@ -78186,6 +78207,15 @@
 /obj/structure/filingcabinet/chestdrawer,
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/heads/hor)
+"uAw" = (
+/obj/item/radio/intercom{
+	broadcasting = 1;
+	listening = 0;
+	name = "Station Intercom (Court)";
+	pixel_y = 20
+	},
+/turf/open/floor/plasteel,
+/area/security/courtroom)
 "uAL" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
@@ -111862,7 +111892,7 @@ aQH
 aTn
 aHD
 aHD
-aXS
+dDc
 aWf
 baT
 bci
@@ -112622,7 +112652,7 @@ fCe
 avk
 avk
 eZU
-aIR
+uAw
 aKc
 aLC
 aMO
