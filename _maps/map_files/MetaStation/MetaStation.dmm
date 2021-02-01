@@ -21036,6 +21036,7 @@
 /area/hallway/primary/central)
 "baY" = (
 /obj/structure/extinguisher_cabinet{
+	dir = 1;
 	pixel_y = -30
 	},
 /obj/effect/turf_decal/tile/neutral{
@@ -25376,6 +25377,7 @@
 /area/storage/tcom)
 "bkY" = (
 /obj/structure/extinguisher_cabinet{
+	dir = 1;
 	pixel_y = -30
 	},
 /obj/effect/turf_decal/tile/yellow{
