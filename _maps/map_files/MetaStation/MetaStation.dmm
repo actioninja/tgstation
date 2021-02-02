@@ -55196,7 +55196,7 @@
 	pixel_x = 27
 	},
 /obj/machinery/light/small{
-	dir = 8
+	dir = 1
 	},
 /turf/open/floor/wood,
 /area/crew_quarters/bar)
@@ -81552,6 +81552,9 @@
 /area/medical/patients_rooms)
 "wWE" = (
 /obj/machinery/smartfridge,
+/obj/effect/turf_decal/stripes/line{
+	dir = 5
+	},
 /turf/open/floor/plasteel,
 /area/hallway/secondary/service)
 "wWK" = (
